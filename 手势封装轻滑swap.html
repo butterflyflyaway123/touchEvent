@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+	<style>
+	html,body{
+		margin: 0;
+		padding: 0;
+		background: greenyellow;
+	}
+		.bx{
+			width: 200px;
+			height: 200px;
+			background: greenyellow;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+
+	<script>
+		//获取元素
+		//var box=document.querySelector(".box");
+
+		//定义相关变量
+		var startX,startY,endX,endY,absX,absY;
+
+		//给document添加touchstart事件
+		document.addEventListener("touchstart", function(e){
+			var touches=e.targetTouches[0];
+
+			startX=touches.clientX;
+			startY=touches.clientY;
+
+		});
+
+			//给document添加touchend事件
+		document.addEventListener("touchend", function(e){
+			var touches=e.changedTouches[0];
+
+			endX=touches.clientX;
+			endY=touches.clientY;
+			
+			absX=Math.abs(endX-startX);
+			absY=Math.abs(endY-startY);
+
+			//排除等要素三角型的情况
+			if(absX == absY){
+				return false;
+			}
+
+			var result=absX > absY ? 
+			endX > startX ? "向右" : "向左"
+			: endY > startY ? "向下" : " 向上" ;
+			console.log(result);
+		});
+	</script>
+</body>
+</html>

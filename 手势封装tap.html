@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<style>
+	html,body{
+		margin: 0;
+		padding: 0;	
+	}
+		.box{
+			width: 200px;
+			height: 200px;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+
+	<script>
+		//获取元素
+		var box=document.querySelector(".box");
+		var num=0;
+		//定义相关变量
+		var startX,startY,endX,endY,startTime,endTime;
+		//给box绑定touchstart事件
+		box.addEventListener('touchstart', function(e){
+			var touches=e.targetTouches[0];  //第一个触点
+			startX=touches.clientX;
+			startY=touches.clientY;
+			startTime=new Date().getTime();
+		});
+
+		//给box绑定touchend事件
+		box.addEventListener('touchend', function(e){
+			var touches=e.changedTouches[0];  //第一个触点
+			endX=touches.clientX;
+			endY=touches.clientY;
+			endTime=new Date().getTime();
+
+			//判断结果
+			if(Math.abs(endX-startX)<6 && Math.abs(endY-startY) < 6 && Math.abs(endTime-startTime )<120){
+				num++;
+				box.innerHTML="tap手势触发"+num;
+
+			}
+		});
+
+	</script>
+</body>
+</html>

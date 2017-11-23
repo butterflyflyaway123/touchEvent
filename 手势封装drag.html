@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+	<style>
+	html,body{
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		background-color: yellowgreen;
+	}
+		.box{
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			background-color: pink;
+			top: 10px;
+			left: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+
+	<script>
+		
+		//1.获取元素
+		var box=document.querySelector(".box");
+		//定义相关变量
+		var startX,startY,currentX,currentY,_top,_left;
+		//2.给元素绑定事件
+		box.addEventListener("touchstart", function(e){
+			var touches=e.targetTouches[0];
+
+			startX=touches.clientX;
+			startY=touches.clientY;
+
+			_top=this.offsetTop;
+			_left=this.offsetLeft;
+		});
+
+		box.addEventListener("touchmove", function(e){
+			var touches=e.changedTouches[0];
+
+			currentX=touches.clientX;
+			currentY=touches.clientY;
+
+			this.style.left=_left+(currentX-startX)+"px";
+			this.style.top=_top+(currentY-startY)+"px";
+
+			console.log("left:"+this.style.left+"====="+"top:"+this.style.top);
+
+		});
+
+
+	</script>
+</body>
+</html>
